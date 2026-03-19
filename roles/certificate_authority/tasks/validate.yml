@@ -39,5 +39,7 @@
   ansible.builtin.assert:
     that:
       - winca_key_length | int in _winca_allowed_key_lengths
-    fail_msg: "Key length for {{ winca_crypto_provider_algorithm | upper }} keys must be one of: {{ _winca_allowed_key_lengths | join(', ') }}"
+    fail_msg: >-
+      Key length for {{ winca_crypto_provider_algorithm | upper }} keys must be one of:
+      {{ _winca_allowed_key_lengths | join(', ') }}
     success_msg: "{{ winca_crypto_provider_algorithm | upper }} key length of {{ winca_key_length }} is valid."

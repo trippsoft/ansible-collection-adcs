@@ -35,7 +35,7 @@ provisioner:
         cert_signing_ca_hostname: ca
         cert_signing_ca_user: vagrant
         cert_signing_ca_password: vagrant
-        cert_signing_ca_shell_type: powershell        
+        cert_signing_ca_shell_type: powershell
         cert_signing_ca_fqdn: ca
         cert_signing_ca_common_name: RootCA
         cert_signing_ca_csr_path: "C:\\Windows\\Temp\\{{ inventory_hostname }}.csr"
@@ -46,7 +46,15 @@ provisioner:
         ansible_password: vagrant
     host_vars:
       ca:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
         winca_install_management_tools: true
         winca_is_root_ca: true
         winca_is_ad_integrated: false
@@ -54,6 +62,14 @@ provisioner:
         winca_password: vagrant
         winca_ca_cert_common_name: RootCA
       win:
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: >-
+          -o PreferredAuthentications=password
+          -o PubkeyAuthentication=no
+          -o UserKnownHostsFile=/dev/null
+          -o ControlMaster=auto
+          -o ControlPersist=60s
+          -o ForwardX11=no
+          -o LogLevel=ERROR
+          -o StrictHostKeyChecking=no
 verifier:
   name: ansible

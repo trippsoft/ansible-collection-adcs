@@ -13,8 +13,8 @@
       ansible.builtin.assert:
         that:
           - _winca_cert_store.exists
-        fail_msg: "No certificates are installed."
-        success_msg: "At least one certificate is installed.  Continuing validation."
+        fail_msg: No certificates are installed.
+        success_msg: At least one certificate is installed.  Continuing validation.
 
     - name: Filter to only expected certificate
       ansible.builtin.set_fact:
@@ -30,7 +30,8 @@
         that:
           - _winca_certs | length > 0
         fail_msg: "No certificates with the expected common name '{{ winca_ca_cert_common_name }}' are installed."
-        success_msg: "At least one certificate with the expected common name '{{ winca_ca_cert_common_name }}' is installed."
+        success_msg: >-
+          At least one certificate with the expected common name '{{ winca_ca_cert_common_name }}' is installed.
 
     - name: Get latest expiring certificate
       ansible.builtin.set_fact:

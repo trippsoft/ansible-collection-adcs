@@ -51,7 +51,7 @@
               - not _winca_iis_installed.changed
             fail_msg: The IIS roles are not installed.
             success_msg: The IIS roles are installed.
-        
+
         - name: Check CertEnroll virtual directory is configured
           check_mode: true
           microsoft.iis.virtual_directory:
@@ -95,7 +95,7 @@
 
     - name: Verify Certification Authority is installed
       ansible.builtin.assert:
-        that: 
+        that:
           - not _winca_ca_installed.changed
         fail_msg: The AD CS Certification Authority is not installed.
         success_msg: The AD CS Certification Authority is installed.
@@ -152,7 +152,7 @@
 
     - name: Verify Certification Authority is installed
       ansible.builtin.assert:
-        that: 
+        that:
           - not _winca_ca_installed.changed
         fail_msg: The AD CS Certification Authority is not installed.
         success_msg: The AD CS Certification Authority is installed.
@@ -204,7 +204,7 @@
 
     - name: Verify Certification Authority is installed
       ansible.builtin.assert:
-        that: 
+        that:
           - not _winca_ca_installed.changed
         fail_msg: The AD CS Certification Authority is not installed.
         success_msg: The AD CS Certification Authority is installed.
@@ -256,7 +256,7 @@
 
     - name: Verify Certification Authority is installed
       ansible.builtin.assert:
-        that: 
+        that:
           - not _winca_ca_installed.changed
         fail_msg: The AD CS Certification Authority is not installed.
         success_msg: The AD CS Certification Authority is installed.

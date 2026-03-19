@@ -28,7 +28,7 @@
       when:
         - _winca_iis_installed.reboot_required
       ansible.windows.win_reboot:
-    
+
     - name: Install CertEnroll virtual directory
       microsoft.iis.virtual_directory:
         site: Default Web Site

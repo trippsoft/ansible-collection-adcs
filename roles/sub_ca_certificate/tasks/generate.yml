@@ -50,8 +50,9 @@
 
     - name: Set Request ID to fact
       ansible.builtin.set_fact:
-        _winsubca_request_id: '{{ _winsubca_csr_submit.stdout | regex_search("^RequestId:\s+\d+") | regex_replace("RequestId: ") }}'
-    
+        _winsubca_request_id: >-
+          {{ _winsubca_csr_submit.stdout | regex_search("^RequestId:\s+\d+") | regex_replace("RequestId: ") }}
+
     - name: Accept certificate request
       ansible.windows.win_shell: |
         certutil.exe -config "{{ winsubca_signing_ca_config }}" -resubmit {{ _winsubca_request_id }}
@@ -93,10 +94,15 @@
 - name: Set signed certificate content to variable
   when:
     - lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', item) | type_debug != 'list'
-    - lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', item) >= lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', '-----BEGIN CERTIFICATE-----')
-    - lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', item) <= lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', '-----END CERTIFICATE-----')
+    - >-
+      lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', item) >=
+      lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', '-----BEGIN CERTIFICATE-----')
+    - >-
+      lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', item) <=
+      lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', '-----END CERTIFICATE-----')
   ansible.builtin.set_fact:
-    _winsubca_signed_cert_content: "{{ _winsubca_signed_cert_content | default('') }}{{ item }}{{ winsubca_cert_line_break_character }}"
+    _winsubca_signed_cert_content: >-
+      {{ _winsubca_signed_cert_content | default('') }}{{ item }}{{ winsubca_cert_line_break_character }}
   loop: "{{ _winsubca_signed_cert.stdout_lines }}"
 
 - name: Transfer signed certificate to subordinate CA
