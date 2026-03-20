@@ -26,6 +26,7 @@
 
     - name: Reboot, if needed
       when:
+        - _winca_iis_installed is changed
         - _winca_iis_installed.reboot_required
       ansible.windows.win_reboot:
 
