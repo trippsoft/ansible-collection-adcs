@@ -92,6 +92,7 @@
     state: absent
 
 - name: Set signed certificate content to variable
+  loop: "{{ _winsubca_signed_cert.stdout_lines }}"
   when:
     - lookup('ansible.utils.index_of', _winsubca_signed_cert.stdout_lines, 'eq', item) | type_debug != 'list'
     - >-
@@ -103,7 +104,6 @@
   ansible.builtin.set_fact:
     _winsubca_signed_cert_content: >-
       {{ _winsubca_signed_cert_content | default('') }}{{ item }}{{ winsubca_cert_line_break_character }}
-  loop: "{{ _winsubca_signed_cert.stdout_lines }}"
 
 - name: Transfer signed certificate to subordinate CA
   ansible.windows.win_copy:
