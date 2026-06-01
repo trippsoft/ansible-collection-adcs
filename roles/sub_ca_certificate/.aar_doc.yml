@@ -4,7 +4,7 @@ output_mode: replace
 
 output_template: |
   <!-- BEGIN_ANSIBLE_DOCS -->
-  
+
   # Ansible Role: {{ role }}
   {%- if "version" in galaxy_collection %}
   Version: {{ galaxy_collection.version }}
