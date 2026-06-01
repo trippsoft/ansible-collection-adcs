@@ -9,8 +9,22 @@ defaults:
     working-directory: 'trippsc2.adcs'
 jobs:
   release:
-    name: Release
-    uses: trippsoft/github-actions/.github/workflows/release.yml@main
-    with:
-      working_directory: 'trippsc2.adcs'
-    secrets: inherit
+    name: Release collection
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.adcs
+      - name: Release
+        working-directory: 'trippsc2.adcs'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          ansible-galaxy collection build --force
+          ansible-galaxy collection publish --token "${{ secrets.GALAXY_API_KEY }}" *.tar.gz
+          rm -rf *.tar.gz
+          deactivate

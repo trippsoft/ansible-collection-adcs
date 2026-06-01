@@ -28,12 +28,30 @@ defaults:
     working-directory: 'trippsc2.adcs'
 jobs:
   molecule:
-    name: Run Molecule test
-    uses: trippsoft/github-actions/.github/workflows/molecule.yml@main
-    with:
-      working_directory: 'trippsc2.adcs'
-      role_name: 'certificate_authority'
-      box: ${{ matrix.box }}
+    name: Run Molecule tests - certificate_authority
+    runs-on:
+      - self-hosted
+      - linux
+      - ansible
+      - x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: trippsc2.adcs
+      - name: Run Molecule tests
+        working-directory: 'trippsc2.adcs'
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          cd ./roles/certificate_authority
+          molecule test
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          deactivate
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: '1'
+          MOLECULE_BOX: ${{ matrix.box }}
     strategy:
       fail-fast: false
       matrix:

@@ -38,11 +38,13 @@ jobs:
       fail-fast: false
       matrix:
         box:
-          - debian12_base
-          - fedora42_base
-          - fedora41_base
+          - debian13_base
+          - fedora44_base
+          - fedora43_base
+          - rocky10_base
           - rocky9_cis
           - rocky8_cis
+          - ubuntu2604_base
           - ubuntu2404_base
           - ubuntu2204_base
     steps:
@@ -73,11 +75,13 @@ jobs:
       fail-fast: false
       matrix:
         box:
-          - debian12_base
-          - fedora42_base
-          - fedora41_base
+          - debian13_base
+          - fedora44_base
+          - fedora43_base
+          - rocky10_base
           - rocky9_cis
           - rocky8_cis
+          - ubuntu2604_base
           - ubuntu2404_base
           - ubuntu2204_base
     steps:
@@ -111,9 +115,9 @@ jobs:
           - w2025_cis
           - w2022_cis
           - w2019_cis
+          - w11_25h2_base
           - w11_24h2_base
           - w11_23h2_base
-          - w10_22h2_base
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -145,9 +149,9 @@ jobs:
           - w2025_cis
           - w2022_cis
           - w2019_cis
+          - w11_25h2_base
           - w11_24h2_base
           - w11_23h2_base
-          - w10_22h2_base
     steps:
       - name: Checkout
         uses: actions/checkout@v6
