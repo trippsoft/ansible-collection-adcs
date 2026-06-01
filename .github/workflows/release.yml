@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           path: trippsc2.adcs
-      - name: Release
+      - name: Release collection
         working-directory: 'trippsc2.adcs'
         run: |
           source ~/venv/ansible-2.16/bin/activate
