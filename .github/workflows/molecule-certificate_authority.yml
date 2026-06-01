@@ -28,7 +28,7 @@ defaults:
     working-directory: 'trippsc2.adcs'
 jobs:
   molecule:
-    name: Run Molecule tests - certificate_authority
+    name: Run Molecule tests
     runs-on:
       - self-hosted
       - linux
