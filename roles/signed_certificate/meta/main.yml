@@ -20,18 +20,23 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - bookworm
+        - trixie
     - name: EL
       versions:
+        - '10'
         - '9'
         - '8'
-    - name: Windows
+    - name: Fedora
       versions:
         - all
     - name: Ubuntu
       versions:
+        - resolute
         - noble
         - jammy
+    - name: Windows
+      versions:
+        - all
 
 collections:
   - ansible.utils

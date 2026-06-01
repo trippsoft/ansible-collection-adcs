@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2025-06-01
+
+### Role - signed_certificate
+
+- Added support for Debian 13.
+- Added support for Fedora 44.
+- Added support for Fedora 43.
+- Added support for Rocky Linux 10.
+- Added support for Ubuntu 26.04.
+
 ## [1.4.4] - 2025-06-10
 
 ### Collection

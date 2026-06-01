@@ -1,7 +1,7 @@
 ---
 namespace: trippsc2
 name: adcs
-version: 1.4.4
+version: 1.5.0
 readme: README.md
 authors:
   - Jim Tarpley (@trippsc2)
@@ -19,7 +19,7 @@ dependencies:
   ansible.windows: ">=2.6.0"
   community.windows: ">=2.6.0"
   microsoft.iis: ">=1.0.0"
-  trippsc2.general: ">=2.7.0"
+  trippsc2.general: ">=2.12.0"
   trippsc2.windows: ">=1.0.0"
 
 repository: https://github.com/trippsoft/ansible-collection-adcs.git
