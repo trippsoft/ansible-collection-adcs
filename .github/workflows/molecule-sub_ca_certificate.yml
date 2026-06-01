@@ -34,6 +34,13 @@ jobs:
       - linux
       - ansible
       - x64
+    strategy:
+      fail-fast: false
+      matrix:
+        box:
+          - w2025_cis
+          - w2022_cis
+          - w2019_cis
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -52,10 +59,3 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           PY_COLORS: '1'
           MOLECULE_BOX: ${{ matrix.box }}
-    strategy:
-      fail-fast: false
-      matrix:
-        box:
-          - w2025_cis
-          - w2022_cis
-          - w2019_cis
