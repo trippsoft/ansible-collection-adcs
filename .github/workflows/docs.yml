@@ -52,6 +52,7 @@ jobs:
           deactivate
   docs_signed_certificate:
     name: Generate signed_certificate role documentation
+    needs: docs_certificate_authority
     permissions:
       contents: write
     runs-on:
@@ -77,9 +78,9 @@ jobs:
           git commit -m "Update signed_certificate role documentation." || /bin/true
           git push origin main
           deactivate
-    needs: docs_certificate_authority
   docs_sub_ca_certificate:
     name: Generate sub_ca_certificate role documentation
+    needs: docs_signed_certificate
     permissions:
       contents: write
     runs-on:
@@ -105,4 +106,3 @@ jobs:
           git commit -m "Update sub_ca_certificate role documentation." || /bin/true
           git push origin main
           deactivate
-    needs: docs_signed_certificate
