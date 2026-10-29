@@ -1,7 +1,6 @@
 ---
 name: Molecule - signed_certificate role
 'on':
-  workflow_call: {}
   workflow_dispatch: {}
   pull_request:
     branches:
@@ -39,14 +38,20 @@ jobs:
       matrix:
         box:
           - debian13_base
-          - fedora44_base
           - fedora43_base
-          - rocky10_base
-          - rocky9_cis
+          - fedora44_base
           - rocky8_cis
-          - ubuntu2604_base
-          - ubuntu2404_base
+          - rocky9_cis
+          - rocky10_base
           - ubuntu2204_base
+          - ubuntu2404_base
+          - ubuntu2604_base
+        ansible:
+          - '2.16'
+          - '2.21'
+        exclude:
+          - box: rocky8_cis
+            ansible: '2.21'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -54,7 +59,7 @@ jobs:
           path: 'trippsc2.adcs'
       - name: Run Molecule tests
         run: |
-          source ~/venv/ansible-2.16/bin/activate
+          source ~/venv/ansible-${{ matrix.ansible }}/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
           cd ./roles/signed_certificate
           molecule test -s linux
@@ -64,6 +69,7 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           PY_COLORS: '1'
           MOLECULE_BOX: ${{ matrix.box }}
+          MOLECULE_ANSIBLE_VERSION: ${{ matrix.ansible }}
   molecule_linux_pipe:
     name: Run Molecule tests - Linux to variable
     runs-on:
@@ -76,14 +82,20 @@ jobs:
       matrix:
         box:
           - debian13_base
-          - fedora44_base
           - fedora43_base
-          - rocky10_base
-          - rocky9_cis
+          - fedora44_base
           - rocky8_cis
-          - ubuntu2604_base
-          - ubuntu2404_base
+          - rocky9_cis
+          - rocky10_base
           - ubuntu2204_base
+          - ubuntu2404_base
+          - ubuntu2604_base
+        ansible:
+          - '2.16'
+          - '2.21'
+        exclude:
+          - box: rocky8_cis
+            ansible: '2.21'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -91,7 +103,7 @@ jobs:
           path: 'trippsc2.adcs'
       - name: Run Molecule tests
         run: |
-          source ~/venv/ansible-2.16/bin/activate
+          source ~/venv/ansible-${{ matrix.ansible }}/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
           cd ./roles/signed_certificate
           molecule test -s linux_pipe
@@ -101,6 +113,7 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           PY_COLORS: '1'
           MOLECULE_BOX: ${{ matrix.box }}
+          MOLECULE_ANSIBLE_VERSION: ${{ matrix.ansible }}
   molecule_win:
     name: Run Molecule tests - Windows to file
     runs-on:
@@ -112,12 +125,15 @@ jobs:
       fail-fast: false
       matrix:
         box:
-          - w2025_cis
-          - w2022_cis
           - w2019_cis
-          - w11_25h2_base
+          - w2022_cis
+          - w2025_cis
           - w11_24h2_base
-          - w11_23h2_base
+          - w11_25h2_base
+          - w11_26h2_base
+        ansible:
+          - '2.16'
+          - '2.21'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -125,7 +141,7 @@ jobs:
           path: 'trippsc2.adcs'
       - name: Run Molecule tests
         run: |
-          source ~/venv/ansible-2.16/bin/activate
+          source ~/venv/ansible-${{ matrix.ansible }}/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
           cd ./roles/signed_certificate
           molecule test -s win
@@ -135,6 +151,7 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           PY_COLORS: '1'
           MOLECULE_BOX: ${{ matrix.box }}
+          MOLECULE_ANSIBLE_VERSION: ${{ matrix.ansible }}
   molecule_win_pipe:
     name: Run Molecule tests - Windows to variable
     runs-on:
@@ -146,12 +163,15 @@ jobs:
       fail-fast: false
       matrix:
         box:
-          - w2025_cis
-          - w2022_cis
           - w2019_cis
-          - w11_25h2_base
+          - w2022_cis
+          - w2025_cis
           - w11_24h2_base
-          - w11_23h2_base
+          - w11_25h2_base
+          - w11_26h2_base
+        ansible:
+          - '2.16'
+          - '2.21'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -159,7 +179,7 @@ jobs:
           path: 'trippsc2.adcs'
       - name: Run Molecule tests
         run: |
-          source ~/venv/ansible-2.16/bin/activate
+          source ~/venv/ansible-${{ matrix.ansible }}/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
           cd ./roles/signed_certificate
           molecule test -s win_pipe
@@ -169,3 +189,4 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           PY_COLORS: '1'
           MOLECULE_BOX: ${{ matrix.box }}
+          MOLECULE_ANSIBLE_VERSION: ${{ matrix.ansible }}

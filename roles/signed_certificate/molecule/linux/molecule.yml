@@ -1,6 +1,8 @@
 ---
 dependency:
   name: galaxy
+  options:
+    requirements-file: ${MOLECULE_SCENARIO_DIRECTORY}/requirements-${MOLECULE_ANSIBLE_VERSION:-2.16}.yml
 driver:
   name: vagrant
   provider:
@@ -9,7 +11,7 @@ driver:
   parallel: true
 platforms:
   - name: ca
-    box: jtarpley/w2025_cis
+    box: trippsc2/w2025_cis
     memory: 2048
     cpus: 2
     provider_options:
@@ -17,7 +19,7 @@ platforms:
     groups:
       - windows
   - name: linux
-    box: jtarpley/${MOLECULE_BOX:-rocky9_cis}
+    box: trippsc2/${MOLECULE_BOX:-rocky9_cis}
     memory: 2048
     cpus: 2
     provider_options:
@@ -30,9 +32,9 @@ provisioner:
     group_vars:
       subjects:
         cert_private_key_path: >-
-          {{ '/etc/pki/tls/private/cert.key' if ansible_os_family == 'RedHat' else '/etc/ssl/private/cert.key' }}
+          {{ '/etc/pki/tls/private/cert.key' if ansible_facts.os_family == 'RedHat' else '/etc/ssl/private/cert.key' }}
         cert_certificate_path: >-
-          {{ '/etc/pki/tls/certs/cert.crt' if ansible_os_family == 'RedHat' else '/etc/ssl/certs/cert.crt' }}
+          {{ '/etc/pki/tls/certs/cert.crt' if ansible_facts.os_family == 'RedHat' else '/etc/ssl/certs/cert.crt' }}
         cert_private_key_owner: test
         cert_private_key_group: test
         cert_certificate_owner: test

@@ -39,8 +39,10 @@
     - name: Get FQDN fact
       delegate_facts: true
       ansible.builtin.setup:
-        filter:
-          - ansible_fqdn
+        gather_subset:
+          - '!all'
+          - '!min'
+          - platform
 
     - name: Submit CSR to CA
       ansible.windows.win_shell: |

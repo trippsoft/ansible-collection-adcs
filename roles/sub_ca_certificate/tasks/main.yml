@@ -37,7 +37,7 @@
     - name: Set variable, if certificate needs renewal
       ansible.builtin.set_fact:
         _winsubca_generate_cert: >-
-          {{ _winsubca_latest_cert.valid_to - ansible_date_time.epoch | int < winsubca_renewal_days * 86400 }}
+          {{ _winsubca_latest_cert.valid_to - ansible_facts.date_time.epoch | int < winsubca_renewal_days * 86400 }}
 
 - name: Generate certificate, if necessary
   when:

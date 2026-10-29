@@ -6,4 +6,4 @@
   ansible.builtin.import_tasks: sign.yml
 
 - name: Include OS family tasks
-  ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "{{ ansible_facts.os_family }}.yml"

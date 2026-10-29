@@ -54,7 +54,7 @@ argument_specs:
       winsubca_signing_ca_fqdn:
         type: str
         required: false
-        default: "{{ hostvars[winsubca_signing_ca_hostname].ansible_fqdn }}"
+        default: "{{ hostvars[winsubca_signing_ca_hostname].ansible_facts.fqdn }}"
         description:
           - Fully qualified domain name of the signing CA.
           - If `winsubca_signing_ca_config` and `winsubca_rootca_file_path` are provided, this value is ignored.

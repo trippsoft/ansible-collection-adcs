@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.1] - 2026-10-29
+
+### Role - certificate_authority
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
+### Role - signed_certificate
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
+### Role - sub_ca_certificate
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
 ## [1.5.0] - 2025-06-01
 
 ### Role - signed_certificate

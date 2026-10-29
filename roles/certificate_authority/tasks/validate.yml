@@ -1,9 +1,9 @@
 ---
 - name: Gathering Facts
   when:
-    - ansible_distribution is not defined or
-      ansible_os_family is not defined or
-      ansible_windows_domain_member is not defined
+    - ansible_facts.distribution is not defined or
+      ansible_facts.os_family is not defined or
+      ansible_facts.windows_domain_member is not defined
   ansible.builtin.setup:
     gather_subset:
       - '!all'
@@ -15,17 +15,17 @@
 - name: Validate Windows Server
   ansible.builtin.assert:
     that:
-      - ansible_os_family == 'Windows'
-      - ('Windows Server' in ansible_distribution)
-    fail_msg: "This role can only be run on a Windows Server system.  {{ ansible_distribution }} is not supported."
-    success_msg: "This role is running on {{ ansible_distribution }}."
+      - ansible_facts.os_family == 'Windows'
+      - ('Windows Server' in ansible_facts.distribution)
+    fail_msg: "This role can only be run on a Windows Server system.  {{ ansible_facts.distribution }} is not supported."
+    success_msg: "This role is running on {{ ansible_facts.distribution }}."
 
 - name: Validate that the machine is a domain member
   when:
     - winca_is_ad_integrated
   ansible.builtin.assert:
     that:
-      - ansible_windows_domain_member
+      - ansible_facts.windows_domain_member
     fail_msg: This machine is not a domain member.
     success_msg: This machine is a domain member.
 

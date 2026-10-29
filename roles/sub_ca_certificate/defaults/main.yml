@@ -7,7 +7,7 @@ winsubca_signing_ca_cert_file_temp_path: C:\Windows\temp\signingcacert.crt
 winsubca_cert_file_temp_path: C:\Windows\temp\cacert.crt
 
 winsubca_signing_ca_fqdn: >-
-  {{ hostvars[winsubca_signing_ca_hostname].ansible_fqdn }}
+  {{ hostvars[winsubca_signing_ca_hostname].ansible_facts.fqdn }}
 winsubca_signing_ca_config: >-
   {{ winsubca_signing_ca_fqdn }}\{{ winsubca_signing_ca_common_name }}
 winsubca_rootca_file_path: >-
